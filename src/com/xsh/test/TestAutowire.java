@@ -5,7 +5,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.xsh.dao.User;
-import com.xsh.dao.UserService;
+import com.xsh.service.UserService;
 
 /**
  * package:com.xsh.test

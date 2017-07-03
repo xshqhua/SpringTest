@@ -20,7 +20,8 @@
 	    http://www.springframework.org/schema/aop/spring-aop.xsd  
 	    http://www.springframework.org/schema/util  
 	    http://www.springframework.org/schema/util/spring-util.xsd"
-	    default-lazy-init="true" default-destroy-method="destroy" default-init-method="init">
+	default-lazy-init="true" default-destroy-method="destroy"
+	default-init-method="init">
 
 	<!-- 自动扫描web包 ,将带有注解的类 纳入spring容器管理 -->
 	<bean id="calendarObj1" class="java.util.GregorianCalendar"></bean>
@@ -31,58 +32,46 @@
 	<bean id="dateObj2" factory-bean="calendarObj4" factory-method="getTime"></bean>
 	<!-- 这里是用于注释的内容 -->
 	<bean id="exampleBean" class="com.xsh.dao.ExampleBean"></bean>
-	<bean id="exampleBean2" class="com.xsh.dao.ExampleBean" scope="prototype"></bean>
+	
 	<bean id="exampleBean3" class="com.xsh.dao.ExampleBean" scope="prototype" init-method="init"></bean>
-	<bean id="exampleBean4" class="com.xsh.dao.ExampleBean" scope="singleton" init-method="init" destroy-method="destroy" lazy-init="true"></bean>
+	<bean id="exampleBean4" class="com.xsh.dao.ExampleBean" scope="singleton"
+		init-method="init" destroy-method="destroy" lazy-init="true"></bean>
+	<bean id="exampleBean2" class="com.xsh.dao.ExampleBean" scope="prototype"></bean>
 
-	
-	<bean id="exampleBean5" class="com.xsh.dao.ExampleBean" scope="prototype" depends-on="exampleBeanDepend"></bean>
+
+	<bean id="exampleBean5" class="com.xsh.dao.ExampleBean" scope="prototype"
+		depends-on="exampleBeanDepend"></bean>
 	<bean id="exampleBeanDepend" class="com.xsh.dao.ExampleBean2"></bean>
-	
-	<bean id="exampleBean6" class="com.xsh.dao.ExampleBean" >
+
+	<bean id="exampleBean6" class="com.xsh.dao.ExampleBean">
 		<property name="name" value="xushihua"></property>
-	
+
 	</bean>
-	
-	
-	
-	
+
+
+
+
 	<!-- 这里是学习autowire的内容 -->
 	<bean id="user" class="com.xsh.dao.User">
 		<property name="id" value="suda10086"></property>
 		<property name="name" value="xshqhua"></property>
 		<property name="age" value="20"></property>
 	</bean>
-	
+
 	<bean id="user2" class="com.xsh.dao.User">
 		<constructor-arg index="0" value="zte10086"></constructor-arg>
 		<constructor-arg index="1" value="xushihau"></constructor-arg>
 		<constructor-arg index="2" value="22"></constructor-arg>
 	</bean>
-	<!-- 
-	<bean id="userService" class="com.xsh.dao.UserService" autowire="byType"></bean>
-	 -->
-	 <bean id="userService" class="com.xsh.dao.UserService">
-	 	<property name="user" ref="user2"></property>
-	 </bean>
-	
-	<bean id="userServices2" class="com.xsh.dao.UserService">
+	<!-- <bean id="userService" class="com.xsh.service.UserService" autowire="byType"></bean> -->
+	<bean id="userService" class="com.xsh.service.UserService">
+		<property name="user" ref="user2"></property>
+	</bean>
+
+	<bean id="userServices2" class="com.xsh.service.UserService">
 		<constructor-arg index="0" ref="user"></constructor-arg>
 	</bean>
-	
-	<bean id ="userService3" class="com.xsh.dao.UserService" autowire="byName"></bean>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	<bean id="userService3" class="com.xsh.service.UserService" autowire="byName"></bean>
+
 </beans>
