@@ -29,8 +29,15 @@ public class TestAutowire {
 		User u2 = applicationContext.getBean("user2",User.class);
 		u2.print();
 		
+		System.out.println("-------------------UserServices-------------------");
 		UserService userService = applicationContext.getBean("userService",UserService.class);
 		userService.user.print();
+		
+		UserService userService2=applicationContext.getBean("userServices2",UserService.class);
+		userService2.user.print();
+		
+		UserService userService3=applicationContext.getBean("userServices2",UserService.class);
+		userService3.user.print();
 		
 		AbstractApplicationContext apt = (AbstractApplicationContext)applicationContext;
 		apt.close();
