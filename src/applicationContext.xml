@@ -20,6 +20,7 @@
 	    http://www.springframework.org/schema/aop/spring-aop.xsd  
 	    http://www.springframework.org/schema/util  
 	    http://www.springframework.org/schema/util/spring-util.xsd"
+	    
 	default-lazy-init="true" default-destroy-method="destroy"
 	default-init-method="init">
 
@@ -38,7 +39,6 @@
 		init-method="init" destroy-method="destroy" lazy-init="true"></bean>
 	<bean id="exampleBean2" class="com.xsh.dao.ExampleBean" scope="prototype"></bean>
 
-
 	<bean id="exampleBean5" class="com.xsh.dao.ExampleBean" scope="prototype"
 		depends-on="exampleBeanDepend"></bean>
 	<bean id="exampleBeanDepend" class="com.xsh.dao.ExampleBean2"></bean>
@@ -47,9 +47,6 @@
 		<property name="name" value="xushihua"></property>
 
 	</bean>
-
-
-
 
 	<!-- 这里是学习autowire的内容 -->
 	<bean id="user" class="com.xsh.dao.User">
@@ -64,6 +61,7 @@
 		<constructor-arg index="2" value="22"></constructor-arg>
 	</bean>
 	<!-- <bean id="userService" class="com.xsh.service.UserService" autowire="byType"></bean> -->
+	
 	<bean id="userService" class="com.xsh.service.UserService">
 		<property name="user" ref="user2"></property>
 	</bean>
@@ -73,5 +71,123 @@
 	</bean>
 
 	<bean id="userService3" class="com.xsh.service.UserService" autowire="byName"></bean>
-
+	
+	<!-- Core2 Spring Test and atudy -->
+	<bean id="messageBean" class="com.xsh.dao.MessageBean">
+		<property name="moduleName">
+			<value>testmodule</value>
+		</property>
+		<property name="userName" value="xsh"></property>
+		<property name="password">
+			<value>abc123</value>
+		</property>
+		
+		<property name="list">
+			<list>
+				<value>苏州</value>
+				<value>南京</value>
+				<value>北京</value>
+				<value>上海</value>
+			</list>
+		</property>
+		
+		<property name="set">
+			<set>
+				<value>xxx</value>
+				<value>abc</value>
+				<value>abc</value>
+				<value>xxx2</value>
+				<value>2xcdx</value>
+				<value>2edf</value>
+			</set>
+		</property>
+	
+		<property name="map">
+			<map>
+				<entry key="key1">
+					<value>xxx</value>
+				</entry>
+				
+				<entry key="key2" value="xsh"></entry>
+			</map>
+		</property>		
+		
+		<property name="properties">
+			<props>
+				<prop key="p1">p</prop>
+				<prop key="p2">pp</prop>
+			</props>
+		</property>
+		
+	</bean>
+	
+	
+	<util:list id="list">
+		<value>x1</value>
+		<value>x1</value>
+		<value>x12</value>
+		<value>x13</value>
+	</util:list>
+	<util:set id ="set">
+		<value>set2</value>
+		<value>set2</value>
+		<value>set24</value>
+		<value>set25</value>
+	</util:set>
+	<util:map id="map">
+		<entry key="key" value="value"/>
+		<entry key="key2" value="value2"/>
+		<entry key="key3" value="value3"/>
+	</util:map>
+	<util:properties id="properties">
+		<prop key="prop">properties</prop>
+		<prop key="prop2">properties2</prop>
+		<prop key="prop3">properties3</prop>
+		<prop key="prop4">properties4</prop>
+	</util:properties>
+	<bean id="messageBean2" class="com.xsh.dao.MessageBean">
+		<property name="moduleName">
+			<value>Todule</value>
+		</property>
+		<property name="userName" value="xsh"></property>
+		<property name="password">
+			<value>a2b3c3</value>
+		</property>
+		
+		<property name="list" ref="list"></property>
+		<property name="set" ref="set"></property>
+		<property name="map" ref="map"></property>
+		<property name="properties" ref="properties"></property>
+	</bean>
+	
+	<!-- 记住location中的书写格式 classpath:db.properties -->
+	<util:properties id="p2" location="classpath:db.properties"></util:properties>
+	
+	<bean id="messageBean3" class="com.xsh.dao.MessageBean">
+		<property name="moduleName">
+			<null/>
+		</property>
+		<property name="userName" value="#{p2.user}"></property>
+		<property name="password">
+			<value>#{p2.password}</value>
+		</property>
+		
+		<property name="list" ref="list"></property>
+		<property name="set" ref="set"></property>
+		<property name="map" ref="map"></property>
+		
+		<property name="properties" ref="properties"></property>
+		
+	</bean>
+	
+	<!-- 测试组件 -->
+	<context:component-scan base-package="com"></context:component-scan>
+		
+	
+	
+	
+	
+	
+	
+	
 </beans>

@@ -4,9 +4,9 @@ package com.xsh.dao;
  * package:com.xsh.dao fine:User.java author:XSH datetime:2017年7月3日 下午3:51:22
  */
 public class User {
-	public String id = "";
-	public String name = "";
-	public int age = 0;
+	private String id = "";
+	private String name = "";
+	private int age = 0;
 
 	public User() {
 	}
